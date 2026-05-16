@@ -1,0 +1,117 @@
+<!-- login.component.html -->
+<div class="login-page">
+
+  <!-- Background dots -->
+  <div class="bg-dots"></div>
+  <div class="bg-glow-tl"></div>
+  <div class="bg-glow-br"></div>
+
+  <div class="login-wrapper">
+
+    <!-- Left: Brand panel -->
+    <div class="login-brand">
+      <div class="brand-logo">
+        <span class="brand-logo-icon">📚</span>
+        <span class="brand-logo-name">Assignment<span>Buddy</span></span>
+      </div>
+
+      <h2 class="brand-tagline">
+        Ask anything.<br>
+        From any <em>PDF.</em>
+      </h2>
+
+      <p class="brand-sub">
+        Upload your documents and get instant AI‑powered answers.
+        Study smarter, not harder.
+      </p>
+
+      <div class="brand-features">
+        <div class="feature-pill">
+          <span class="feature-dot"></span>
+          Upload PDFs instantly
+        </div>
+        <div class="feature-pill">
+          <span class="feature-dot"></span>
+          AI answers in seconds
+        </div>
+        <div class="feature-pill">
+          <span class="feature-dot"></span>
+          Your files, private &amp; secure
+        </div>
+      </div>
+
+      <span class="brand-url">assignmentbuddy.ai</span>
+    </div>
+
+    <!-- Right: Form card -->
+    <div class="login-card">
+      <div class="login-card-inner">
+
+        <div class="card-header">
+          <h1>Welcome Back</h1>
+          <p>Sign in to continue to AssignmentBuddy</p>
+        </div>
+
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+          <!-- Error Alert -->
+          <div class="error-alert" *ngIf="errorMessage">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            {{ errorMessage }}
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              placeholder="you@example.com"
+              [class.is-error]="hasError('email')">
+            <span class="field-error" *ngIf="hasError('email')">{{ getErrorMessage('email') }}</span>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              placeholder="Enter your password"
+              [class.is-error]="hasError('password')">
+            <span class="field-error" *ngIf="hasError('password')">{{ getErrorMessage('password') }}</span>
+          </div>
+
+          <div class="field-row">
+            <label class="check-label">
+              <input type="checkbox" formControlName="rememberMe">
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="forgot-link">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn-submit" [disabled]="isSubmitting">
+            <span *ngIf="!isSubmitting">Sign In</span>
+            <span *ngIf="isSubmitting" class="btn-loading">
+              <svg class="spin-svg" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="50" stroke-dashoffset="25"></circle>
+              </svg>
+              Signing in...
+            </span>
+          </button>
+
+        </form>
+
+        <div class="card-footer">
+          <p>Don't have an account? <a routerLink="/signup">Sign up</a></p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
